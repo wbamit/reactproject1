@@ -7,7 +7,7 @@ import './App.css'
 
 function MyButton() {
   return (
-    <button onClick={() => alert('hello this is react github project')}>I'm a button</button>
+    <button onClick={() => alert('hello this is react github project.')}>I'm a button</button>
   );
 }
 
