@@ -1,11 +1,32 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+
+import './assets/bootstrap.min.css'
+import './assets/style.css'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 
+import Home from './pages/Home';
+import About from './pages/About';
 
-function MyButton() {
+function App() {
+  return (
+    <Router>
+      <nav>
+        <Link to="/">Home</Link> | 
+        <Link to="/about">About Us</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
+  );
+}
+
+/*function MyButton() {
   return (
     <button onClick={() => alert('hello')}>I'm a button</button>
   );
@@ -39,7 +60,7 @@ function App() {
       </p>
     </>
   )
-}
+}*/
 
 
 export default App
