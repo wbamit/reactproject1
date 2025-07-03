@@ -6,18 +6,14 @@ import './assets/bootstrap.min.css'
 import './assets/style.css'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-
+import Navbar from './components/Navbar'
 import Home from './pages/Home';
 import About from './pages/About';
 
 function App() {
   return (
     <Router>
-      <nav>
-        <Link to="/">Home</Link> | 
-        <Link to="/about">About Us</Link>
-      </nav>
-
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
