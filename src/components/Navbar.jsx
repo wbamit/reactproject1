@@ -7,7 +7,7 @@ function Navbar() {
     <div className="container-fluid">
         <nav className="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
             <a href="index.html" className="navbar-brand p-0">
-                <h1 className="display-6 text-primary m-0"><i className="fas fa-envelope me-3"></i>Mailler</h1>
+                <h1 className="display-6 text-primary m-0"><i className="fas fa-envelope me-3"></i>RC</h1>
             </a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span className="fa fa-bars"></span>

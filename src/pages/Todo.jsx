@@ -7,9 +7,10 @@ function Todo() {
   const addTask = () => {
     if (task.trim() === '') return;
     setTodos([...todos, { text: task, completed: false }]);
+    console.log(todos);
     setTask('');
   };
-  
+
   const toggleComplete = (index) => {
     const updatedTodos = [...todos];
     updatedTodos[index].completed = !updatedTodos[index].completed;
@@ -33,14 +34,14 @@ function Todo() {
           placeholder="Enter a task"
           style={styles.input}
         />
-        <button onClick={addTask} style={styles.addButton}>Add</button>
+        <button onClick={addTask} style={styles.addButton} className='btn btn-primary'>Add</button>
       </div>
 
       <ul style={styles.list}>
         {todos.map((todo, index) => (
           <li key={index} style={{ ...styles.item, textDecoration: todo.completed ? 'line-through' : 'none' }}>
             <span onClick={() => toggleComplete(index)} style={{ cursor: 'pointer' }}>{todo.text}</span>
-            <button onClick={() => deleteTask(index)} style={styles.deleteButton}>❌</button>
+            <button onClick={() => deleteTask(index)} className='btn btn-secondary'>X</button>
           </li>
         ))}
       </ul>
@@ -49,12 +50,12 @@ function Todo() {
 }
 
 const styles = {
-  container: { padding: 20, maxWidth: 500, margin: 'auto', fontFamily: 'Arial' },
+  container: { padding: 20, maxWidth: 500, margin: 'auto' },
   inputContainer: { display: 'flex', gap: 10, marginBottom: 20 },
   input: { flex: 1, padding: 8 },
   addButton: { padding: '8px 16px' },
   list: { listStyle: 'none', padding: 0 },
-  item: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 },
+  item: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, padding: '5px 10px', background: '#eee' },
   deleteButton: { background: 'red', color: 'white', border: 'none', padding: '4px 8px', cursor: 'pointer' }
 };
 
