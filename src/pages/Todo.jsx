@@ -7,7 +7,6 @@ function Todo() {
   const addTask = () => {
     if (task.trim() === '') return;
     setTodos([...todos, { text: task, completed: false }]);
-    console.log(todos);
     setTask('');
   };
 
@@ -38,7 +37,7 @@ function Todo() {
       </div>
 
       <ul style={styles.list}>
-        {todos.map((todo, index) => (
+        {todos.map((todo, index) => (            
           <li key={index} style={{ ...styles.item, textDecoration: todo.completed ? 'line-through' : 'none' }}>
             <span onClick={() => toggleComplete(index)} style={{ cursor: 'pointer' }}>{todo.text}</span>
             <button onClick={() => deleteTask(index)} className='btn btn-secondary'>X</button>

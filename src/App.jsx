@@ -13,14 +13,14 @@ import Todo from './pages/Todo';
 
 function App() {
   return (
-    <Router>
-      <Navbar/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/todo" element={<Todo />} />
-      </Routes>
-    </Router>
+        <Router>
+          <Navbar/>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/todo" element={<Todo />} />
+          </Routes>
+        </Router>
   );
 }
 
