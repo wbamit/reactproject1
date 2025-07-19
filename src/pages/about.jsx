@@ -56,7 +56,8 @@ function About() {
   const [remarks, setRemarks] = useState('');
 
   const [responseData, setResponseData] = useState(null);
-  const [error, setError] = useState(null);
+  //const [error, setError] = useState(null);
+  const [errors, setErrors] = useState({});
 
   // const [users, setUsers] = useState([]);       // Store fetched data
   // const [loading, setLoading] = useState(true); // Track loading state
@@ -83,6 +84,25 @@ function About() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let newErrors = {};
+    if(!userRegID) newErrors.userRegID = 'Enter user registration ID';
+    if (!type) newErrors.type = 'Enter type';
+    if (!amount) newErrors.amount = 'Enter amount';
+    if (!requestForm) newErrors.requestForm = 'Enter request form';
+    if (!bankName) newErrors.bankName = 'Enter bank name';
+    if (!transactionID) newErrors.transactionID = 'Enter transaction ID';
+    if (!paymentBy) newErrors.paymentBy = 'Enter payment method';
+    if (!depositDate) newErrors.depositDate = 'Enter deposit date';
+    if (!remarks) newErrors.remarks = 'Enter remarks';
+      
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({});
+
     const token = '25|9QLLMryDLgU5ZHxCLvlbLAxwY5zuoyBhZM1Jn0mjb5671de4'; 
     try {
       const response = await fetch('https://testproject.co.in/api/apiforapp/v1/wallet/add-money', {
@@ -125,20 +145,36 @@ function About() {
                 <h4>Post Data Example</h4>
               <div className="col-lg-6 wow fadeInLeft">
                 <input className="form-control mb-2" type="text" value={userRegID} placeholder="Enter Reg no" onChange={(e) => setUserRegID(e.target.value)}/>
+                {errors.userRegID && (<p> {errors.userRegID}</p> )}
                 <select value={type} className="form-control mb-2" onChange={(e) => setType(e.target.value)}>
                   <option value=""> Select type </option>
                   <option value="online">Online</option>
                   <option value="offline">Offline</option>
                 </select>
+                {errors.type && (<p> {errors.type}</p> )}
+
                 <input className="form-control mb-2" type="text" value={amount} placeholder="Enter amount" onChange={(e) => setAmount(e.target.value)}/>
+                {errors.amount && (<p> {errors.amount}</p> )}
+                
                 <input className="form-control mb-2" type="text" value={requestForm} placeholder="Enter Request Form" onChange={(e) => setRequestForm(e.target.value)}/>
+                {errors.requestForm && (<p> {errors.requestForm}</p> )}
               </div>
               <div className="col-lg-6 wow fadeInRight">
                 <input className="form-control mb-2"type="text" value={bankName} placeholder="Enter bank name" onChange={(e) => setBankName(e.target.value)}/>
+                {errors.bankName && (<p> {errors.bankName}</p> )}
+
                 <input className="form-control mb-2" type="text" value={transactionID} placeholder="Enter transaction ID" onChange={(e) => setTransactionID(e.target.value)}/>
+                {errors.transactionID && (<p> {errors.transactionID}</p> )}
+
                 <input className="form-control mb-2"type="text" value={paymentBy} placeholder="Enter payment by" onChange={(e) => setPaymentBy(e.target.value)}/>
+                {errors.paymentBy && (<p> {errors.paymentBy}</p> )}
+
                 <input className="form-control mb-2" type="text" value={depositDate} placeholder="Enter deposit date" onChange={(e) => setDepositDate(e.target.value)}/>
+                {errors.depositDate && (<p> {errors.depositDate}</p> )}
+
                 <input className="form-control mb-2" type="text" value={remarks} placeholder="Enter remarks" onChange={(e) => setRemarks(e.target.value)}/>
+                {errors.remarks && (<p> {errors.remarks}</p> )}
+
               </div>
               <button type="submit" className='btn btn-primary mb-4'>Send</button>
               {/* <div className="">
@@ -154,9 +190,6 @@ function About() {
               </div>
             </form>
 
-            
-
-          {error && <p style={{ color: 'red' }}>{error}</p>}
 
           {responseData && (
             <>
