@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /*function About() {
   const [users, setUsers] = useState([]);       // Store fetched data
@@ -57,7 +60,7 @@ function About() {
   const [remarks, setRemarks] = useState('');
 
   const [responseData, setResponseData] = useState(null);
-  //const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
   const [errors, setErrors] = useState({});
 
   // const [users, setUsers] = useState([]);       // Store fetched data
@@ -87,6 +90,7 @@ function About() {
     e.preventDefault();
 
     let newErrors = {};
+    //if(!userRegID) toast.error('Enter user registration ID');
     if(!userRegID) newErrors.userRegID = 'Enter user registration ID';
     if (!type) newErrors.type = 'Enter type';
     if (!amount) newErrors.amount = 'Enter amount';
@@ -97,7 +101,6 @@ function About() {
     if (!paymentBy) newErrors.paymentBy = 'Enter payment method';
     if (!depositDate) newErrors.depositDate = 'Enter deposit date';
     if (!remarks) newErrors.remarks = 'Enter remarks';
-      
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -130,10 +133,19 @@ function About() {
       
       if (!response.ok) {
         throw new Error('Failed to send data');
+      }      
+
+      //Here need an extra flag in error message to show in a right place 
+      if (data.error) {
+        newErrors.remarks = data.message;
+        //setErrors(newErrors);
+        toast.error(data.message);
+        return;
       }
 
       const data = await response.json();
-      console.log(data);
+      alert(data);
+      console(data);
       setResponseData(data);
     } catch (err) {
       setError(err.message);
@@ -147,6 +159,7 @@ function About() {
             <form onSubmit={handleSubmit}>
               <div className="row gy-5 align-items-center">
                 <h4>Post Data Example</h4>
+                <ToastContainer />
               <div className="col-lg-6 wow fadeInLeft">
                 <input className="form-control mb-2" type="text" value={userRegID} placeholder="Enter Reg no" onChange={(e) => setUserRegID(e.target.value)}/>
                 {errors.userRegID && (<p> {errors.userRegID}</p> )}
