@@ -48,6 +48,7 @@ function About() {
   const [userRegID, setUserRegID] = useState('');
   const [type, setType] = useState('');
   const [amount, setAmount] = useState('');
+  const [userType, setUserType] = useState('');
   const [requestForm, setRequestForm] = useState('');
   const [bankName, setBankName] = useState('');
   const [transactionID, setTransactionID] = useState('');
@@ -89,6 +90,7 @@ function About() {
     if(!userRegID) newErrors.userRegID = 'Enter user registration ID';
     if (!type) newErrors.type = 'Enter type';
     if (!amount) newErrors.amount = 'Enter amount';
+    if (!userType) newErrors.userType = 'Enter user type';
     if (!requestForm) newErrors.requestForm = 'Enter request form';
     if (!bankName) newErrors.bankName = 'Enter bank name';
     if (!transactionID) newErrors.transactionID = 'Enter transaction ID';
@@ -105,7 +107,7 @@ function About() {
 
     const token = '25|9QLLMryDLgU5ZHxCLvlbLAxwY5zuoyBhZM1Jn0mjb5671de4'; 
     try {
-      const response = await fetch('https://testproject.co.in/api/apiforapp/v1/wallet/add-money', {
+      const response = await fetch('https://testproject.co.in/api/apiforapp/v1/wallet/initiate-payment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -116,6 +118,7 @@ function About() {
           type: type,
           type: type,
           amount: amount,
+          userType: userType,
           requestForm: requestForm,
           bankName: bankName,
           transactionID: transactionID,
@@ -130,6 +133,7 @@ function About() {
       }
 
       const data = await response.json();
+      console.log(data);
       setResponseData(data);
     } catch (err) {
       setError(err.message);
@@ -155,6 +159,9 @@ function About() {
 
                 <input className="form-control mb-2" type="text" value={amount} placeholder="Enter amount" onChange={(e) => setAmount(e.target.value)}/>
                 {errors.amount && (<p> {errors.amount}</p> )}
+
+                <input className="form-control mb-2" type="text" value={userType} placeholder="Enter user type" onChange={(e) => setUserType(e.target.value)}/>
+                {errors.userType && (<p> {errors.userType}</p> )}
                 
                 <input className="form-control mb-2" type="text" value={requestForm} placeholder="Enter Request Form" onChange={(e) => setRequestForm(e.target.value)}/>
                 {errors.requestForm && (<p> {errors.requestForm}</p> )}
